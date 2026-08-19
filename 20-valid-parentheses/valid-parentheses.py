@@ -3,9 +3,11 @@ class Solution:
         stack=[]
         mapping={")":"(","}":"{","]":"["}
         for char in s:
-            if char in mapping.values():
-                stack.append(char)
-            elif char in mapping.keys():
-                if not stack or mapping[char]!=stack.pop():
+            if char in mapping:
+                if stack and stack[-1]==mapping[char]:
+                    stack.pop()
+                else:
                     return False
+            else:
+                stack.append(char)
         return not stack
